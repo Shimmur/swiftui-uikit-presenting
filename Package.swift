@@ -3,6 +3,9 @@ import PackageDescription
 
 let package = Package(
     name: "swiftui-uikit-presenting",
+    platforms: [
+        .iOS(.v14)
+    ],
     products: [
         .library(
             name: "UIViewControllerPresenting",
@@ -16,7 +19,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "UIViewControllerPresentingTests",
-            dependencies: []
+            dependencies: ["UIViewControllerPresenting"]
         ),
     ]
 )
