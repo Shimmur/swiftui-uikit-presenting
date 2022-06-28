@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 /// A SwiftUI view that can be used to present an arbitrary UIKit view controller.
 ///
