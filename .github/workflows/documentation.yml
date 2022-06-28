@@ -40,13 +40,14 @@ jobs:
                 echo "✅ Documentation for "$tag" already exists.";
             else
                 git checkout "$tag";
-                mkdir -p docs-out/"$tag";
+                export DOCS_OUTPUT_PATH=docs-out/"$tag";
+                export HOSTING_BASE_PATH=/swiftui-uikit-presenting/"$tag"
+                mkdir -p $DOCS_OUTPUT_PATH;
 
                 xcodebuild docbuild \
                   -scheme UIViewControllerPresenting \
                   -destination generic/platform=iOS \
-                  DOCC_OUTPUT_DIR=docs-out/"$tag" \
-                  OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path UIViewControllerPresenting"
+                  OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path $HOSTING_BASE_PATH --output-path $DOCS_OUTPUT_PATH"
             fi;
           done
 
