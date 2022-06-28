@@ -11,14 +11,26 @@ let package = Package(
             name: "UIViewControllerPresenting",
             targets: ["UIViewControllerPresenting"]
         ),
+        .library(
+            name: "SafariWebView",
+            targets: ["SafariWebView"]
+        )
     ],
     dependencies: [],
     targets: [
         .target(
             name: "UIViewControllerPresenting",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "UIViewControllerPresentingTests",
+            dependencies: ["UIViewControllerPresenting"]
+        ),
+
+        // MARK: - Example Libraries
+
+        .target(
+            name: "SafariWebView",
             dependencies: ["UIViewControllerPresenting"]
         ),
     ]
