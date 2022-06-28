@@ -40,7 +40,7 @@ jobs:
                 echo "✅ Documentation for "$tag" already exists.";
             else
                 git checkout "$tag";
-                mkdir -p Sources/UIViewControllerPresenting/Documentation.docc;
+                mkdir -p docs-out/"$tag";
 
                 xcodebuild docbuild \
                   -scheme UIViewControllerPresenting \
