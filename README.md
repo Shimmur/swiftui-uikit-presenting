@@ -2,6 +2,10 @@
 
 This package provides a custom SwiftUI view modifier and component that can be used to present UIKit views from a SwiftUI view using UIKit presentation APIs. It can also be used to present other SwiftUI views by wrapping them in a `UIHostingController` giving you access to presentation APIs that are not available in SwiftUI prior to iOS 16, such as sheet detents.
 
+## Documentation
+
+* [API Documentation (main branch)](https://shimmur.github.io/swiftui-uikit-presenting/main/documentation/uiviewcontrollerpresenting/)
+
 ## Copyright and License
 
 This library was developed out of the work on our app here at [Community.com](http://community.com) and is made available under the [Apache 2.0 license](LICENSE).
@@ -19,5 +23,5 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License. 
+limitations under the License.
 ```
