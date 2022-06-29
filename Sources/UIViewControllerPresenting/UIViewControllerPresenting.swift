@@ -44,7 +44,7 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
     ///    - Context: The context value, if one is present (otherwise Void).
     ///    - DismissHandler: A callback closure that can be called to indicate the controller was dismissed.
     ///
-    let _makeUIViewController: (Context, @escaping DismissHandler) -> Controller
+    private let _makeUIViewController: (Context, @escaping DismissHandler) -> Controller
 
     /// A closure that should return a coordinator for this view, if one is needed.
     ///
@@ -56,18 +56,18 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
     ///    - DismissHandler: The dismiss handler - you should keep a reference to this in your
     ///     coordinator object if it needs to call it later, .e.g. in a delegate callback.
     ///
-    let _makeCoordinator: (@escaping DismissHandler) -> Coordinator
+    private let _makeCoordinator: (@escaping DismissHandler) -> Coordinator
 
     /// Controls whether the presentation should be animated or not.
-    var animated: Bool = true
+    private var animated: Bool = true
 
     /// The state used to drive the presentation and disappearance of the UIViewController.
     @Binding
-    var isPresented: Bool
+    private var isPresented: Bool
 
     /// Used to track the actual presentation state of the presented view controller.
     @State
-    var isActuallyPresented: Bool = false
+    private var isActuallyPresented: Bool = false
 
     private var presentationDelegate: PresentationDelegate?
 
