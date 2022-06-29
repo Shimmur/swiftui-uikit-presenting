@@ -32,6 +32,6 @@ let package = Package(
         .target(
             name: "SafariWebView",
             dependencies: ["UIViewControllerPresenting"]
-        ),
+        )
     ]
 )

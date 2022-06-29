@@ -2,6 +2,14 @@
 
 This package provides a custom SwiftUI view modifier and component that can be used to present UIKit views from a SwiftUI view using UIKit presentation APIs. It can also be used to present other SwiftUI views by wrapping them in a `UIHostingController` giving you access to presentation APIs that are not available in SwiftUI prior to iOS 16, such as sheet detents.
 
+## SafariWebView
+
+This package also contains a standalone library built on top of `UIViewControllerPresenting` which allows you to present a Safari web view controller from a SwiftUI view using a binding-based interface.
+
+## Examples
+
+For further examples of how this library can be used, please see the Examples directory.
+
 ## Documentation
 
 * [API Documentation (main branch)](https://shimmur.github.io/swiftui-uikit-presenting/main/documentation/uiviewcontrollerpresenting/)
