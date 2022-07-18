@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 /// A SwiftUI view that can be used to present an arbitrary UIKit view controller.
 ///
@@ -66,8 +65,8 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
     private var isPresented: Bool
 
     /// Used to track the actual presentation state of the presented view controller.
-    @State
-    private var isActuallyPresented: Bool = false
+    @StateObject
+    private var presentationState = PresentationState()
 
     private var presentationDelegate: PresentationDelegate?
 
@@ -81,7 +80,7 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
         self._makeUIViewController = makeUIViewController
         self._makeCoordinator = makeCoordinator
         self.animated = animated
-        self.presentationDelegate = .init(isPresented: isPresented, isActuallyPresented: $isActuallyPresented)
+        self.presentationDelegate = .init(handleDismiss: handleDismiss)
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -100,7 +99,7 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
     }
 
     public func updateUIViewController(_ presentingViewController: UIViewController, context: Context) {
-        switch (isPresented, isActuallyPresented) {
+        switch (isPresented, presentationState.isActuallyPresented) {
         case (true, false):
             presentViewController(from: presentingViewController, context: context)
         case (false, true):
@@ -113,7 +112,7 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
     }
 
     private func handleDismiss() {
-        isActuallyPresented = false
+        presentationState.isActuallyPresented = false
         isPresented = false
     }
 
@@ -127,23 +126,23 @@ public struct UIViewControllerPresenting<Controller: UIViewController, Coordinat
         viewController.presentationController?.delegate = presentationDelegate
 
         presentingViewController.present(viewController, animated: animated) {
-            isActuallyPresented = true
+            presentationState.isActuallyPresented = true
         }
     }
 
-    private class PresentationDelegate: NSObject, UIAdaptivePresentationControllerDelegate {
-        private let isPresented: Binding<Bool>
-        private let isActuallyPresented: Binding<Bool>
+    private class PresentationState: ObservableObject {
+        @Published var isActuallyPresented: Bool = false
+    }
 
-        init(isPresented: Binding<Bool>, isActuallyPresented: Binding<Bool>) {
-            self.isPresented = isPresented
-            self.isActuallyPresented = isActuallyPresented
+    private class PresentationDelegate: NSObject, UIAdaptivePresentationControllerDelegate {
+        private let handleDismiss: () -> Void
+
+        init(handleDismiss: @escaping () -> Void) {
+            self.handleDismiss = handleDismiss
         }
 
         func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-            // If the user swipes to dismiss the sheet, reset presentation binding.
-            isPresented.wrappedValue = false
-            isActuallyPresented.wrappedValue = false
+            self.handleDismiss()
         }
     }
 }
