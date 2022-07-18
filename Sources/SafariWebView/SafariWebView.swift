@@ -18,6 +18,7 @@ public extension View {
         url: URL,
         configuration: SFSafariViewController.Configuration? = nil,
         isPresented: Binding<Bool>,
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
         animated: Bool = true
     ) -> some View {
         background(
@@ -45,6 +46,7 @@ public extension View {
     func safariWebView(
         url: Binding<URL?>,
         configuration: SFSafariViewController.Configuration? = nil,
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
         animated: Bool = true
     ) -> some View {
         background(
@@ -62,6 +64,7 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
         url: URL,
         configuration: SFSafariViewController.Configuration?,
         isPresented: Binding<Bool>,
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
         animated: Bool = true
     ) -> Self {
         .init(
@@ -70,7 +73,8 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
                 makeSafariViewController(
                     url: url,
                     configuration: configuration,
-                    delegate: context.coordinator
+                    delegate: context.coordinator,
+                    modalPresentationStyle: modalPresentationStyle
                 )
             },
             makeCoordinator: { dismissHandler in
@@ -83,6 +87,7 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
     static func safariViewController(
         url: Binding<URL?>,
         configuration: SFSafariViewController.Configuration?,
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
         animated: Bool = true
     ) -> Self {
         .init(
@@ -93,7 +98,8 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
                 makeSafariViewController(
                     url: url.wrappedValue!,
                     configuration: configuration,
-                    delegate: context.coordinator
+                    delegate: context.coordinator,
+                    modalPresentationStyle: modalPresentationStyle
                 )
             },
             makeCoordinator: { dismissHandler in
@@ -106,7 +112,8 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
     private static func makeSafariViewController(
         url: URL,
         configuration: SFSafariViewController.Configuration?,
-        delegate: SFSafariViewControllerDelegate
+        delegate: SFSafariViewControllerDelegate,
+        modalPresentationStyle: UIModalPresentationStyle
     ) -> SFSafariViewController {
         let safariViewController: SFSafariViewController
         if let configuration = configuration {
@@ -115,7 +122,7 @@ extension UIViewControllerPresenting where Controller == SFSafariViewController,
             safariViewController = .init(url: url)
         }
         safariViewController.delegate = delegate
-        safariViewController.modalPresentationStyle = .fullScreen
+        safariViewController.modalPresentationStyle = modalPresentationStyle
         return safariViewController
     }
 }
