@@ -16,7 +16,7 @@ public extension View {
     /// - Parameters:
     ///    - activityItems: The items you want to share.
     ///    - isPresented: A binding that indicates if this sheet should be visible - will be set back to `false` when the sheet is dismissed.
-    ///    - onCompletion: Called when the user shares their number or dismisses the share sheet without sharing.
+    ///    - onCompletion: Called when the user shares the items or dismisses the share sheet without sharing.
     ///
     func shareSheet(
         activityItems: [Any],
@@ -24,7 +24,7 @@ public extension View {
         onCompletion: UIActivityViewController.CompletionWithItemsHandler? = nil
     ) -> some View {
         background(
-            UIViewControllerPresenting.phoneNumberShareSheet(
+            UIViewControllerPresenting.shareSheet(
                 activityItems: activityItems,
                 isPresented: isPresented,
                 completionHandler: onCompletion
