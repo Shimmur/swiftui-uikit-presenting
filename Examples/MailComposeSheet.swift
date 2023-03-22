@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 public extension View {
     /// Presents a native mail compose interface using MFMailComposeViewController.
     ///
@@ -152,3 +153,4 @@ private class MailComposeViewCoordinator: NSObject, MFMailComposeViewControllerD
         dismiss()
     }
 }
+#endif

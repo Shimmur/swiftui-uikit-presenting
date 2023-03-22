@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 import UIKit
 
@@ -157,3 +158,4 @@ public extension SheetConfiguration {
     }
 }
 
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 
 /// A SwiftUI view that can be used to present an arbitrary UIKit view controller.
@@ -163,3 +164,4 @@ extension UIViewControllerPresenting where Coordinator == Void {
         )
     }
 }
+#endif
