@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import LinkPresentation
 import SwiftUI
 import UniformTypeIdentifiers
@@ -75,3 +76,4 @@ struct PhoneNumberShareSheet_Previews: PreviewProvider {
         PreviewView()
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SafariServices
 import SwiftUI
 import UIViewControllerPresenting
@@ -156,3 +157,4 @@ extension Binding {
         )
     }
 }
+#endif
